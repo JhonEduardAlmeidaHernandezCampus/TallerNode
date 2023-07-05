@@ -156,7 +156,7 @@ INSERT INTO `bodegas` (`id`, `nombre`, `id_responsable`, `estado`, `created_by`,
 (26, 'prueba', 12, 1, NULL, NULL, '2022-06-02 21:47:48', '2022-06-02 21:47:48', NULL),
 (27, 'fsfdf', 13, 1, NULL, NULL, '2022-06-02 21:48:00', '2022-06-02 21:48:00', NULL),
 (28, 'prueba', 12, 1, NULL, NULL, '2022-06-03 00:10:32', '2022-06-03 00:10:32', NULL),
-(29, 'bodegajuanpablo', 19, 1, NULL, NULL, '2022-06-03 00:41:51', '2022-06-03 00:41:51', NULL),
+(29, 'bodegajuanpablo', SUM19, 1, NULL, NULL, '2022-06-03 00:41:51', '2022-06-03 00:41:51', NULL),
 (30, 'micasa', 18, 1, NULL, NULL, '2022-06-03 01:31:09', '2022-06-03 01:31:09', NULL),
 (31, 'casamedrano', 17, 1, NULL, NULL, '2022-06-03 03:21:32', '2022-06-03 03:21:32', NULL),
 (32, 'centro', 18, 1, NULL, NULL, '2022-06-03 03:33:19', '2022-06-03 03:33:19', NULL),
@@ -239,3 +239,19 @@ INSERT INTO `historiales` (`id`, `cantidad`, `id_bodega_origen`, `id_bodega_dest
 (27, 300, 18, 12, 42, NULL, NULL, '2022-06-03 03:51:35', '2022-06-03 03:51:35', NULL),
 (28, 1, 12, 11, 67, NULL, NULL, '2022-07-11 22:17:10', '2022-07-11 22:17:10', NULL),
 (29, 200, 11, 12, 75, 11, NULL, '2022-07-21 21:24:15', '2022-07-21 21:24:15', NULL);
+
+
+
+/* CONSULTAS */
+
+
+/* ORDENAR BODEGAS */
+SELECT * FROM bodegas ORDER BY nombre ASC;
+
+
+/* CREAR BODEGAS */
+INSERT INTO `bodegas` (`id`, `nombre`, `id_responsable`, `estado`, `created_by`, `update_by`, `created_at`, `updated_at`, `deleted_at`) VALUES (51, 'bodega0', 16, 1, 16, NULL, '2022-06-02 12:33:48', NULL, NULL);
+
+
+/* TOTAL */
+SELECT COUNT(id) AS Total FROM productos;
