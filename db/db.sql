@@ -256,7 +256,7 @@ INSERT INTO `bodegas` (`id`, `nombre`, `id_responsable`, `estado`, `created_by`,
 
 
 /* TOTAL */
-SELECT COUNT(id) AS Total FROM productos;
+SELECT * FROM productos INNER JOIN inventarios ON productos.id = inventarios.id_producto WHERE productos.id = 18;
 
 
-SELECT * FROM bodegas ORDER BY nombre ASC;
+SELECT * FROM productos;
