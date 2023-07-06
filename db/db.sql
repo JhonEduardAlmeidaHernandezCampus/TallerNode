@@ -259,4 +259,4 @@ INSERT INTO `bodegas` (`id`, `nombre`, `id_responsable`, `estado`, `created_by`,
 SELECT * FROM productos INNER JOIN inventarios ON productos.id = inventarios.id_producto WHERE productos.id = 18;
 
 
-SELECT * FROM productos;
+SELECT * FROM inventarios;
