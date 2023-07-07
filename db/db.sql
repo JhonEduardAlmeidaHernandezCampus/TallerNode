@@ -248,7 +248,7 @@ INSERT INTO `historiales` (`id`, `cantidad`, `id_bodega_origen`, `id_bodega_dest
 
 
 /* ORDENAR BODEGAS */
-SELECT * FROM bodegas;
+SELECT * FROM produc;
 
 
 /* CREAR BODEGAS */
