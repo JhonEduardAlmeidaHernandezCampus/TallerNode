@@ -78,14 +78,6 @@ storageInventarios.post("/", (req, res) => {
     )
 })
 
-
-// UPDATE 
-/* 
-    - Validar que la cantidad de unidades que se puedan sacar, si tengo 10 no puedo sacar 11
-    - Cambiar la cantidad de origen y destino, al origen restar al destino sumar
-    - Ingresar un nuevo historial por cada accion que se haga
-*/
-
 storageInventarios.put("/translate", (req, res) =>{
     const {id_bodega_origen, id_bodega_destino, id_producto, cantidad} = req.body;
 
@@ -111,26 +103,105 @@ storageInventarios.put("/translate", (req, res) =>{
                 }
         
             } else {
-                
-                let newCount = data[`${positionOrigen}`].cantidad - cantidad; 
-                
-                con.query(
-                    `UPDATE inventarios SET cantidad = ? WHERE id = ?`,
-                    [newCount, data[`${positionOrigen}`].id],
-                    (error, fil) => {
-                        if(error){
-                            console.log(error);
-                            res.status(500).send("Error")
-                        } else {
-                            
-                            res.send("exito")
-                        }
-                    }
-                )
-            }
-            
-        }
+                if (data.length != 2) {
+                    con.query(
+                        `SELECT id FROM inventarios ORDER BY id DESC`,
 
+                        (err, data, fill) => {
+
+                            let newId = data[0].id + 1;
+
+                            con.query(
+                                /*sql*/ `INSERT INTO inventarios (id, id_bodega, id_producto, cantidad, created_by, update_by, created_at, updated_at, deleted_at) VALUES (?, ?, ?, ?, 11, NULL, NULL, NULL, NULL)`,
+                                [newId,id_bodega_destino, id_producto, cantidad],
+
+                                (err, fill) => {
+                                    if (err) {
+                                        console.log(err);
+                                        res.status(500).send("Error al crear el nuevo inventario")
+                                    } else {
+                                        con.query(
+                                            `SELECT id FROM historiales ORDER BY id DESC`,
+
+                                            (err, dataNewHistorial, fill) => {
+                                                
+                                                let idNewHistorial = dataNewHistorial[0].id + 1;
+
+                                                con.query(
+                                                    `INSERT INTO historiales (id, cantidad, id_bodega_origen, id_bodega_destino, id_inventario, created_by, update_by, created_at, updated_at, deleted_at) VALUES(?, ?, ?, ?, ?, 18, NULL, NULL, NULL, NULL)`,
+                                                    [idNewHistorial,cantidad, id_bodega_origen, id_bodega_destino, data[`${positionDestino}`].id],
+
+                                                    (err, fill) => {
+                                                        if (err) {
+                                                            console.log(err);
+                                                            res.status(500).send("Error al crear el historial")
+                                                        } else {
+                                                            res.send("Se creo un nuevo inventario ya que ese producto no existia en esa bodega, y se creo el historial")
+                                                        }
+                                                    }
+                                                )
+                                            }
+                                        )
+                                    }
+                                }
+                            )
+                        }
+                    )
+                } else {
+
+                    let newCount = data[`${positionOrigen}`].cantidad - cantidad; 
+                
+                    con.query(
+                        `UPDATE inventarios SET cantidad = ? WHERE id = ?`,
+                        [newCount, data[`${positionOrigen}`].id],
+                        (error, fil) => {
+                            if(error){
+                                console.log(error);
+                                res.status(500).send("Error al modificar el dato en la bodega A")
+                            } else {
+                                
+                                let newCountMas = data[`${positionDestino}`].cantidad + cantidad;
+
+                                con.query(
+                                    `UPDATE inventarios SET cantidad = ? WHERE id = ?`,
+                                    [newCountMas, data[`${positionDestino}`].id],
+                                    
+                                    (err, fill)=>{
+                                        if (err) {
+                                            console.log(err);
+                                            res.status(500).send("Error al modificar el dato en la bodega B")
+                                        } else {
+                                            con.query(
+                                                `SELECT id FROM historiales ORDER BY id DESC`,
+
+                                                (err, dataHistorial, fill) => {
+                                                    
+                                                    let newIdHistorial = dataHistorial[0].id + 1;
+
+                                                    con.query(
+                                                        `INSERT INTO historiales (id, cantidad, id_bodega_origen, id_bodega_destino, id_inventario, created_by, update_by, created_at, updated_at, deleted_at) VALUES(?, ?, ?, ?, ?, 18, NULL, NULL, NULL, NULL)`,
+                                                        [newIdHistorial,cantidad, id_bodega_origen, id_bodega_destino, data[`${positionDestino}`].id],
+
+                                                        (err, fill) => {
+                                                            if (err) {
+                                                                console.log(err);
+                                                                res.status(500).send("Error al crear el historial")
+                                                            } else {
+                                                                res.send("Se movio el producto y se creo el historial satisfactoriamente")
+                                                            }
+                                                        }
+                                                    )
+                                                }
+                                            )
+                                        }
+                                    }
+                                )
+                            }
+                        }
+                    )
+                }
+            }  
+        }
     )
 })
 

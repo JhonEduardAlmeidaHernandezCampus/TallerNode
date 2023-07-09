@@ -1,8 +1,7 @@
 SHOW DATABASES;
 CREATE DATABASE db_prueba_backend_sql;
 USE db_prueba_backend_sql;
-SELECT * FROM bodegas;
-DROP TABLE inventarios;
+SHOW TABLES db_prueba_backend_sql;
 CREATE TABLE users(
     id BIGINT(20) UNSIGNED NOT NULL PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
@@ -13,9 +12,9 @@ CREATE TABLE users(
     update_by BIGINT(20) UNSIGNED,
     foto VARCHAR(255),
     password VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
-    deleted_at TIMESTAMP
+    created_at VARCHAR(10),
+    updated_at VARCHAR(10),
+    deleted_at VARCHAR(10)
 );
 CREATE TABLE productos(
     id BIGINT(20) UNSIGNED NOT NULL PRIMARY KEY,
@@ -24,9 +23,9 @@ CREATE TABLE productos(
     estado TINYINT(4) NOT NULL,
     created_by BIGINT(20) UNSIGNED,
     update_by BIGINT(20) UNSIGNED,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
-    deleted_at TIMESTAMP
+    created_at VARCHAR(10),
+    updated_at VARCHAR(10),
+    deleted_at VARCHAR(10)
 );
 CREATE TABLE inventarios(
     id BIGINT(20) UNSIGNED NOT NULL PRIMARY KEY,
@@ -35,9 +34,9 @@ CREATE TABLE inventarios(
     cantidad INT(11) NOT NULL,
     created_by BIGINT(20) UNSIGNED,
     update_by BIGINT(20) UNSIGNED,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
-    deleted_at TIMESTAMP
+    created_at VARCHAR(10),
+    updated_at VARCHAR(10),
+    deleted_at VARCHAR(10)
 );
 CREATE TABLE bodegas(
     id BIGINT(20) UNSIGNED NOT NULL PRIMARY KEY,
@@ -46,9 +45,9 @@ CREATE TABLE bodegas(
     estado TINYINT(4) NOT NULL,
     created_by BIGINT(20) UNSIGNED,
     update_by BIGINT(20) UNSIGNED,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
-    deleted_at TIMESTAMP
+    created_at VARCHAR(10),
+    updated_at VARCHAR(10),
+    deleted_at VARCHAR(10)
 );
 CREATE TABLE historiales(
     id BIGINT(20) UNSIGNED NOT NULL PRIMARY KEY,
@@ -58,9 +57,9 @@ CREATE TABLE historiales(
     id_inventario BIGINT(20) UNSIGNED NOT NULL,
     created_by BIGINT(20) UNSIGNED,
     update_by BIGINT(20) UNSIGNED,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
-    deleted_at TIMESTAMP
+    created_at VARCHAR(10),
+    updated_at VARCHAR(10),
+    deleted_at VARCHAR(10)
 );
 ALTER TABLE productos ADD CONSTRAINT fk_productos_created_users FOREIGN KEY (created_by) REFERENCES users (id);
 ALTER TABLE productos ADD CONSTRAINT fk_productos_update_users FOREIGN KEY (update_by) REFERENCES users (id);
@@ -245,10 +244,11 @@ INSERT INTO `historiales` (`id`, `cantidad`, `id_bodega_origen`, `id_bodega_dest
 
 
 /* CONSULTAS */
-
-
-/* ORDENAR BODEGAS */
-SELECT * FROM produc;
+SELECT * FROM inventarios;
+SELECT * FROM historiales;
+SELECT * FROM bodegas;
+SELECT * FROM productos;
+SELECT * FROM users;
 
 
 /* CREAR BODEGAS */
@@ -257,6 +257,3 @@ INSERT INTO `bodegas` (`id`, `nombre`, `id_responsable`, `estado`, `created_by`,
 
 /* TOTAL */
 SELECT * FROM productos INNER JOIN inventarios ON productos.id = inventarios.id_producto WHERE productos.id = 18;
-
-
-SELECT * FROM inventarios;
