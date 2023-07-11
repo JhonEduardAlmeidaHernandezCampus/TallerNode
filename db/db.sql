@@ -1,6 +1,7 @@
 SHOW DATABASES;
 CREATE DATABASE db_prueba_backend_sql;
 USE db_prueba_backend_sql;
+DROP DATABASE db_prueba_backend_sql;
 SHOW TABLES db_prueba_backend_sql;
 CREATE TABLE users(
     id BIGINT(20) UNSIGNED NOT NULL PRIMARY KEY,
@@ -12,9 +13,9 @@ CREATE TABLE users(
     update_by BIGINT(20) UNSIGNED,
     foto VARCHAR(255),
     password VARCHAR(255) NOT NULL,
-    created_at VARCHAR(10),
-    updated_at VARCHAR(10),
-    deleted_at VARCHAR(10)
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    deleted_at TIMESTAMP
 );
 CREATE TABLE productos(
     id BIGINT(20) UNSIGNED NOT NULL PRIMARY KEY,
@@ -23,9 +24,9 @@ CREATE TABLE productos(
     estado TINYINT(4) NOT NULL,
     created_by BIGINT(20) UNSIGNED,
     update_by BIGINT(20) UNSIGNED,
-    created_at VARCHAR(10),
-    updated_at VARCHAR(10),
-    deleted_at VARCHAR(10)
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    deleted_at TIMESTAMP
 );
 CREATE TABLE inventarios(
     id BIGINT(20) UNSIGNED NOT NULL PRIMARY KEY,
@@ -34,9 +35,9 @@ CREATE TABLE inventarios(
     cantidad INT(11) NOT NULL,
     created_by BIGINT(20) UNSIGNED,
     update_by BIGINT(20) UNSIGNED,
-    created_at VARCHAR(10),
-    updated_at VARCHAR(10),
-    deleted_at VARCHAR(10)
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    deleted_at TIMESTAMP
 );
 CREATE TABLE bodegas(
     id BIGINT(20) UNSIGNED NOT NULL PRIMARY KEY,
@@ -45,9 +46,9 @@ CREATE TABLE bodegas(
     estado TINYINT(4) NOT NULL,
     created_by BIGINT(20) UNSIGNED,
     update_by BIGINT(20) UNSIGNED,
-    created_at VARCHAR(10),
-    updated_at VARCHAR(10),
-    deleted_at VARCHAR(10)
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    deleted_at TIMESTAMP
 );
 CREATE TABLE historiales(
     id BIGINT(20) UNSIGNED NOT NULL PRIMARY KEY,
@@ -57,9 +58,9 @@ CREATE TABLE historiales(
     id_inventario BIGINT(20) UNSIGNED NOT NULL,
     created_by BIGINT(20) UNSIGNED,
     update_by BIGINT(20) UNSIGNED,
-    created_at VARCHAR(10),
-    updated_at VARCHAR(10),
-    deleted_at VARCHAR(10)
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    deleted_at TIMESTAMP
 );
 ALTER TABLE productos ADD CONSTRAINT fk_productos_created_users FOREIGN KEY (created_by) REFERENCES users (id);
 ALTER TABLE productos ADD CONSTRAINT fk_productos_update_users FOREIGN KEY (update_by) REFERENCES users (id);
@@ -144,36 +145,36 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `estado`, `created_by`, 
 
 /* SE AGREGA LOS DATOS DE LA TABLA DE BODEGAS */
 INSERT INTO `bodegas` (`id`, `nombre`, `id_responsable`, `estado`, `created_by`, `update_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(11, 'bodega0', 16, 1, 16, NULL, '2022-06-02 15:33:48', NULL, NULL),
-(12, 'bodega1', 18, 1, 18, NULL, '2022-06-02 15:33:48', NULL, NULL),
-(13, 'bodega2', 18, 1, 18, NULL, '2022-06-02 15:33:48', NULL, NULL),
-(18, 'bodega7', 17, 1, 17, NULL, '2022-06-02 15:33:48', NULL, NULL),
-(19, 'bodega8', 11, 1, 11, NULL, '2022-06-02 15:33:48', NULL, NULL),
-(20, 'bodega9', 18, 1, 18, NULL, '2022-06-02 15:33:48', NULL, NULL),
-(22, 'jsjsjss', 13, 1, NULL, NULL, '2022-06-02 21:30:47', '2022-06-02 21:30:47', NULL),
-(23, 'leeche', 13, 1, NULL, NULL, '2022-06-02 21:43:08', '2022-06-02 21:43:08', NULL),
-(24, 'soto1', 15, 1, NULL, NULL, '2022-06-02 21:46:40', '2022-06-02 21:46:40', NULL),
-(25, 'soto2', 15, 1, NULL, NULL, '2022-06-02 21:47:29', '2022-06-02 21:47:29', NULL),
-(26, 'prueba', 12, 1, NULL, NULL, '2022-06-02 21:47:48', '2022-06-02 21:47:48', NULL),
-(27, 'fsfdf', 13, 1, NULL, NULL, '2022-06-02 21:48:00', '2022-06-02 21:48:00', NULL),
-(28, 'prueba', 12, 1, NULL, NULL, '2022-06-03 00:10:32', '2022-06-03 00:10:32', NULL),
-(29, 'bodegajuanpablo', 19, 1, NULL, NULL, '2022-06-03 00:41:51', '2022-06-03 00:41:51', NULL),
-(30, 'micasa', 18, 1, NULL, NULL, '2022-06-03 01:31:09', '2022-06-03 01:31:09', NULL),
-(31, 'casamedrano', 17, 1, NULL, NULL, '2022-06-03 03:21:32', '2022-06-03 03:21:32', NULL),
-(32, 'centro', 18, 1, NULL, NULL, '2022-06-03 03:33:19', '2022-06-03 03:33:19', NULL),
-(35, 'bodega35', 11, 1, NULL, NULL, '2022-06-24 22:30:37', '2022-06-24 22:30:37', NULL),
-(36, 'asdefg', 11, 1, 11, NULL, '2022-06-29 02:24:49', '2022-06-29 02:24:49', NULL),
-(37, 'bodega fg', 11, 1, 11, NULL, '2022-06-29 02:25:17', '2022-06-29 02:25:17', NULL),
-(38, 'bodega fg', 11, 1, 11, NULL, '2022-06-29 02:25:40', '2022-06-29 02:25:40', NULL),
-(39, 'bodega fg 2', 11, 1, 11, NULL, '2022-06-29 02:28:31', '2022-06-29 02:28:31', NULL),
-(40, 'bodega fg 2', 11, 1, 11, NULL, '2022-06-29 02:28:44', '2022-06-29 02:28:44', NULL),
-(41, 'Bodega 13.2', 11, 1, 11, NULL, '2022-07-01 20:29:51', '2022-07-01 20:29:51', NULL),
-(42, 'Bodega Developer 13.2', 11, 1, 11, NULL, '2022-07-01 20:30:24', '2022-07-01 20:30:24', NULL),
-(43, 'Bodega Developer 13.2', 11, 1, 11, NULL, '2022-07-11 18:37:11', '2022-07-11 18:37:11', NULL),
-(44, 'Bodega 59', 11, 1, 11, NULL, '2022-07-11 18:44:50', '2022-07-11 18:44:50', NULL),
-(48, 'Bodega Anderson Atuesta', 11, 11, NULL, NULL, '2022-07-21 19:57:05', '2022-07-21 19:57:05', NULL),
-(49, 'Bodega Anderson Atuesta555', 11, 11, NULL, NULL, '2022-07-21 21:27:13', '2022-07-21 21:27:13', NULL),
-(50, 'A Bodega', 11, 1, NULL, NULL, '2023-05-25 01:02:57', '2023-05-25 01:02:57', NULL);
+(11, 'bodega0', 16, 1, 16, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(12, 'bodega1', 18, 1, 18, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(13, 'bodega2', 18, 1, 18, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(18, 'bodega7', 17, 1, 17, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(19, 'bodega8', 11, 1, 11, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(20, 'bodega9', 18, 1, 18, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(22, 'jsjsjss', 13, 1, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(23, 'leeche', 13, 1, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(24, 'soto1', 15, 1, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(25, 'soto2', 15, 1, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(26, 'prueba', 12, 1, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(27, 'fsfdf', 13, 1, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(28, 'prueba', 12, 1, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(29, 'bodegajuanpablo', 19, 1, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(30, 'micasa', 18, 1, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(31, 'casamedrano', 17, 1, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(32, 'centro', 18, 1, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(35, 'bodega35', 11, 1, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(36, 'asdefg', 11, 1, 11, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(37, 'bodega fg', 11, 1, 11, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(38, 'bodega fg', 11, 1, 11, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(39, 'bodega fg 2', 11, 1, 11, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(40, 'bodega fg 2', 11, 1, 11, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(41, 'Bodega 13.2', 11, 1, 11, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(42, 'Bodega Developer 13.2', 11, 1, 11, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(43, 'Bodega Developer 13.2', 11, 1, 11, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(44, 'Bodega 59', 11, 1, 11, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(48, 'Bodega Anderson Atuesta', 11, 11, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(49, 'Bodega Anderson Atuesta555', 11, 11, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43'),
+(50, 'A Bodega', 11, 1, NULL, NULL, '2022-06-03 00:33:43', '2022-06-03 00:33:43', '2022-06-03 00:33:43');
 
 
 /* SE AGREGA LOS DATOS DE LA TABLA DE INVENTARIOS */

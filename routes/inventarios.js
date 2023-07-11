@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { Router } from 'express';
 import mysql from 'mysql2';
+import { postInventario, putInventario } from '../middleware/middlewareInventarios.js';
 
 dotenv.config();
 let storageInventarios = Router();
@@ -13,7 +14,7 @@ storageInventarios.use((req, res, next) => {
     next();
 })
 
-storageInventarios.post("/", (req, res) => {
+storageInventarios.post("/", postInventario, (req, res) => {
 
     const {id_bodega, id_producto, cantidad} = req.body;
 
@@ -59,17 +60,25 @@ storageInventarios.post("/", (req, res) => {
                     )
                 } else {
                     con.query(
-                        `INSERT INTO inventarios (id, id_bodega, id_producto, cantidad, created_by, update_by, created_at, updated_at, deleted_at) VALUES (78, ?, ?, ?, 11, NULL, NULL, '2023-05-26 01:35:52', NULL)`,
-                        [id_bodega, id_producto, cantidad],
+                        `SELECT id FROM inventarios ORDER BY id DESC`,
+                        (err, dataPost, fill) => {
 
-                        (err, data, fill) => {
-                            if (err) {
-                                console.log(err);
-                                res.status(500).send("Error al insertar el registro");
+                            let newIdPostInventario = dataPost[0].id + 1;
 
-                            } else {
-                                res.send("Registro ingresado exitosamente")
-                            }
+                            con.query(
+                                `INSERT INTO inventarios (id, id_bodega, id_producto, cantidad, created_by, update_by, created_at, updated_at, deleted_at) VALUES (?, ?, ?, ?, 11, NULL, NULL, '2023-05-26 01:35:52', NULL)`,
+                                [newIdPostInventario, id_bodega, id_producto, cantidad],
+        
+                                (err, data, fill) => {
+                                    if (err) {
+                                        console.log(err);
+                                        res.status(500).send("Error al insertar el registro");
+        
+                                    } else {
+                                        res.send("Registro ingresado exitosamente")
+                                    }
+                                }
+                            )
                         }
                     )
                 }
@@ -78,7 +87,7 @@ storageInventarios.post("/", (req, res) => {
     )
 })
 
-storageInventarios.put("/translate", (req, res) =>{
+storageInventarios.put("/translate", putInventario, (req, res) =>{
     const {id_bodega_origen, id_bodega_destino, id_producto, cantidad} = req.body;
 
     con.query(
@@ -202,7 +211,7 @@ storageInventarios.put("/translate", (req, res) =>{
                 }
             }  
         }
-    )
+        )
 })
 
 export default storageInventarios;
