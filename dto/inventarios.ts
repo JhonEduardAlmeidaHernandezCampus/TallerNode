@@ -1,6 +1,6 @@
 import {Expose, Type, Transform} from 'class-transformer';
 
-export class inventario{
+export class postInventarios{
     @Expose({name: "producto"})
     @Transform(({value}) => {if(Math.floor(value) && typeof value == "number") return Math.floor(value); else throw {status: 200, message: `Los datos no cumplen con los parametros de entrada`};}, {toClassOnly: true}) 
     id_producto: number;

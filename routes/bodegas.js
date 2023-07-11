@@ -21,11 +21,7 @@ storageBodegas.get("/", (req, res)=>{
     }) 
 })
 
-storageBodegas.post("/", (req, res)=>{
-
-    /* 
-    Para agregar un dato a bodegas tiene que hacerlo en este formato 
-    los datos se agregan desde el Thunder CLient
+/* 
     {
         "id": 54,
         "nombre": "bodega JHONNN",
@@ -37,23 +33,33 @@ storageBodegas.post("/", (req, res)=>{
         "updated_at": null,
         "deleted_at": null
     }
-    Recuerde que el id no puede ser repetido ya que es llave primaria 
-    */
+*/
 
-    let data = Object.values(req.body);
+storageBodegas.post("/", (req, res)=>{
+
+    const {nombre, id_responsable, estado, created_by, update_by} = req.body;
 
     con.query(
-    `INSERT INTO bodegas (id, nombre, id_responsable, estado, created_by, update_by, created_at, updated_at, deleted_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    data,
+        `SELECT id FROM bodegas ORDER BY id DESC`,
 
-    (err, data, fil) => {
-        if(err){
-            console.log(err)
-            res.status(500).send("Error al guardar los datos")
-        } else {
-            res.send("Agregado con exito");
-        }
-    }) 
-})
+        (err, data, fil) => {
+            
+            let newId = data[0].id + 1;
+
+            con.query(
+                `INSERT INTO bodegas (id, nombre, id_responsable, estado, created_by, update_by) VALUES (?,?,?,?,?,?)`,
+                [newId, nombre, id_responsable, estado, created_by, update_by],
+
+                (err, dat, fill) => {
+                    if (err) {
+                        console.log(err);
+                        res.status(400).send("Error al ingresar el registro en la bodega")
+                    } else {
+                        res.send("Registro ingresado satisfactoriamente")
+                    }
+                }
+            )
+        }) 
+});
 
 export default storageBodegas;

@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Expose, Transform } from 'class-transformer';
-export class inventario {
+export class postInventarios {
     constructor(id_producto, id_bodega, cantidad) {
         this.id_producto = id_producto;
         this.id_bodega = id_bodega;
@@ -22,7 +22,7 @@ __decorate([
     else
         throw { status: 200, message: `Los datos no cumplen con los parametros de entrada` }; }, { toClassOnly: true }),
     __metadata("design:type", Number)
-], inventario.prototype, "id_producto", void 0);
+], postInventarios.prototype, "id_producto", void 0);
 __decorate([
     Expose({ name: "bodega" }) // -Estos son los campos que hay en la base de datos
     ,
@@ -31,7 +31,7 @@ __decorate([
     else
         throw { status: 200, message: `Los datos no cumplen con los parametros de entrada` }; }, { toClassOnly: true }),
     __metadata("design:type", Number)
-], inventario.prototype, "id_bodega", void 0);
+], postInventarios.prototype, "id_bodega", void 0);
 __decorate([
     Expose({ name: "count" }),
     Transform(({ value }) => { if (Math.floor(value) && typeof value == "number")
@@ -39,7 +39,7 @@ __decorate([
     else
         throw { status: 200, message: `Los datos no cumplen con los parametros de entrada` }; }, { toClassOnly: true }),
     __metadata("design:type", Number)
-], inventario.prototype, "cantidad", void 0);
+], postInventarios.prototype, "cantidad", void 0);
 /* @Transform(({value}) => {if(Math.floor(value) && typeof value == number) return Math.floor(value); else throw {status: 400, message: `Los datos no cumplen con los parametros de entrada`}}, {toClassOnly: true}) */ /* number */
 /* @Transform(({value}) => {if(/^[a-z-A-Z]+$/.test(value)) return value; else throw {status: 400, message: `Los datos no cumplen con los parametros de entrada`}}, {toClassOnly: true}) */ /* string */
 /* @Transform(({value}) => { if(/\S+@\S+\.\S+/.test(value)) return value; else throw {status: 400, message: `Los datos no cumplen con los parametros de entrada`}}, {toClassOnly: true}) */ /* correo */ 

@@ -14,6 +14,14 @@ storageInventarios.use((req, res, next) => {
     next();
 })
 
+/* 
+    {
+    "producto": 18,
+    "bodega": 19,
+    "count": 20
+    }
+*/
+
 storageInventarios.post("/", postInventario, (req, res) => {
 
     const {id_bodega, id_producto, cantidad} = req.body;
@@ -86,6 +94,16 @@ storageInventarios.post("/", postInventario, (req, res) => {
         }
     )
 })
+
+
+/* 
+    {
+    "Producto": 18,
+    "Bodega_Origen": 19,
+    "Bodega_Destino": 20,
+    "Count": 1
+    }
+*/
 
 storageInventarios.put("/translate", putInventario, (req, res) =>{
     const {id_bodega_origen, id_bodega_destino, id_producto, cantidad} = req.body;

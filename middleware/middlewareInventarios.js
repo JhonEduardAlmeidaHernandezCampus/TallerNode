@@ -1,11 +1,11 @@
 import 'reflect-metadata';
 import { plainToClass } from 'class-transformer';
-import { inventario } from '../controller/inventarios.js'
-import { inventariosTranslate } from "../controller/inventariosTranslate.js"
+import { postInventarios } from '../controller/inventarios.js';
+import { putInventarios } from '../controller/inventariosTranslate.js';
 
 const postInventario = (req, res, next) =>{
     try {
-        let data = plainToClass(inventario, req.body, {excludeExtraneousValues: true});
+        let data = plainToClass(postInventarios, req.body, {excludeExtraneousValues: true});
         req.body = data; 
         next();   
     } catch (error) {
@@ -15,7 +15,7 @@ const postInventario = (req, res, next) =>{
 
 const putInventario = (req, res, next) => {
     try {
-        let data = plainToClass(inventario, req.body, {excludeExtraneousValues: true})
+        let data = plainToClass(putInventarios, req.body, {excludeExtraneousValues: true})
         req.body = data
         next();
     } catch (error) {
