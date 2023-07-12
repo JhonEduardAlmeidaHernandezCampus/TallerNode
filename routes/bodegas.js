@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { Router } from 'express';
 import mysql from 'mysql2';
+import postBodega from '../middleware/middlewareBodegas.js';
 
 let storageBodegas = Router();
 dotenv.config();
@@ -23,19 +24,15 @@ storageBodegas.get("/", (req, res)=>{
 
 /* 
     {
-        "id": 54,
-        "nombre": "bodega JHONNN",
-        "id_responsable": 16,
-        "estado": 1,
-        "created_by": 16,
-        "update_by": null,
-        "created_at": null,
-        "updated_at": null,
-        "deleted_at": null
+        "Nombre": "bodegad adasd",
+        "Responsable": 16,
+        "Estado": 1,
+        "Creado_Por": 16,
+        "Actualizado_Por": null
     }
 */
 
-storageBodegas.post("/", (req, res)=>{
+storageBodegas.post("/", postBodega, (req, res)=>{
 
     const {nombre, id_responsable, estado, created_by, update_by} = req.body;
 
@@ -59,7 +56,8 @@ storageBodegas.post("/", (req, res)=>{
                     }
                 }
             )
-        }) 
+        }
+    ) 
 });
 
 export default storageBodegas;

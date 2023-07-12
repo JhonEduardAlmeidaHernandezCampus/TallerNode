@@ -20,7 +20,7 @@ __decorate([
     Transform(({ value }) => { if (Math.floor(value) && typeof value == "number")
         return Math.floor(value);
     else
-        throw { status: 200, message: `Los datos no cumplen con los parametros de entrada` }; }, { toClassOnly: true }),
+        throw { status: 200, message: `Error en los parametros` }; }, { toClassOnly: true }),
     __metadata("design:type", Number)
 ], postInventarios.prototype, "id_producto", void 0);
 __decorate([
@@ -29,7 +29,7 @@ __decorate([
     Transform(({ value }) => { if (Math.floor(value) && typeof value == "number")
         return Math.floor(value);
     else
-        throw { status: 200, message: `Los datos no cumplen con los parametros de entrada` }; }, { toClassOnly: true }),
+        throw { status: 200, message: `Error en los parametros` }; }, { toClassOnly: true }),
     __metadata("design:type", Number)
 ], postInventarios.prototype, "id_bodega", void 0);
 __decorate([
@@ -37,7 +37,7 @@ __decorate([
     Transform(({ value }) => { if (Math.floor(value) && typeof value == "number")
         return Math.floor(value);
     else
-        throw { status: 200, message: `Los datos no cumplen con los parametros de entrada` }; }, { toClassOnly: true }),
+        throw { status: 200, message: `Error en los parametros` }; }, { toClassOnly: true }),
     __metadata("design:type", Number)
 ], postInventarios.prototype, "cantidad", void 0);
 /* @Transform(({value}) => {if(Math.floor(value) && typeof value == number) return Math.floor(value); else throw {status: 400, message: `Los datos no cumplen con los parametros de entrada`}}, {toClassOnly: true}) */ /* number */
