@@ -108,15 +108,11 @@ Este EndPoint permite agregar una nueva bodega.
 
 ```
 {
-  "id": 1,
-  "nombre": "Bodega doña Lucrecia",
-  "id_responsable": 16,
-  "estado": 1,
-  "created_by": 16,
-  "update_by": null,
-  "created_at": "2022-06-02 15:33:48",
-  "updated_at": null,
-  "deleted_at": null
+  "Nombre": "bodegad adasd",
+  "Responsable": 16,
+  "Estado": 1,
+  "Creado_Por": 16,
+  "Actualizado_Por": null
 }
 ```
 
@@ -140,9 +136,9 @@ Este EndPoint permite ingresar o modificar un inventario de producto en una bode
 
 ```
 {
-  "id_producto": 123,
-  "id_bodega": 456,
-  "cantidad": 10
+  "producto": 18,
+  "bodega": 12,
+  "count": 50,
 }
 ```
 
@@ -165,10 +161,10 @@ Este EndPoint permite trasladar una cantidad de producto de una bodega a otra, m
 
 ```
 {
-  "id_bodega_origen": 456,
-  "id_bodega_destino": 789,
-  "id_producto": 123,
-  "cantidad": 5
+  "Producto": 18,
+  "Bodega_Origen": 12,
+  "Bodega_Destino": 50,
+  "Count": 7
 }
 ```
 
@@ -218,29 +214,20 @@ Este EndPoint permite agregar un nuevo producto a la tabla de productos y asigna
 
 **Parámetros de entrada:**
 
-- `id` : id consecuente con los datos que hay en la tabla. "No se puede repetir el mismo id".
-
-- `nombre` : Nombre del producto.
-- `descripcion` : Descripción del producto.
-- `estado`: Estado del producto.
-- `created_by`: ID del usuario que creó el producto.
-- `update_by`: ID del usuario que actualizó el producto.
-- `created_at` : Fecha y hora de creación del producto en formato "YYYY-MM-DD HH:mm:ss".
-- `updated_at`: Fecha y hora de actualización del producto en formato "YYYY-MM-DD HH:mm:ss".
-- `deleted_at`: Fecha y hora de eliminación del producto en formato "YYYY-MM-DD HH:mm:ss".
+- `Nombre` : Nombre del producto.
+- `Descripcion` : Descripción del producto.
+- `Estado`: Estado del producto.
+- `Creado_Por`: ID del usuario que creó el producto.
+- `Modificado_Por`: ID del usuario que actualizó el producto.
 
 **Ejemplo de los datos a pasar:**
 
 ```
 {
-  "id": 1,
-  "nombre": "Producto A",
-  "descripcion": "Descripción del Producto A",
-  "estado": 1,
-  "created_by": 123,
-  "update_by": null,
-  "created_at": "2022-06-02 15:33:48",
-  "updated_at": null,
-  "deleted_at": null
+    "Nombre": "Producto Jhonsito", 
+    "Descripcion": "Nescafe", 
+    "Estado": 1, 
+    "Creado_Por": 16, 
+    "Modificado_Por": null
 }
 ```
